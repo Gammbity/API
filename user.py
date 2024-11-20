@@ -17,7 +17,9 @@ def registration():
     token = secrets.token_hex(8)
     index = len(users)
     users[index] = {"name": name, "email": email, "password": password, "token": token}
+    with open('users.csv', 'a') as file:
+        file.writelines(f"{name},{email},{password},{token}\n")
     return render_template("create_post.html", name="Create Post page")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port='5000')
