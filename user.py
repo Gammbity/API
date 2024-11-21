@@ -15,9 +15,17 @@ dir = "users_files"
 
 @app.route("/", methods=["GET"])
 def main():
-    if 'token' not in session:
-        return redirect(url_for('registration'))
-    return render_template("index.html")
+    if 'username' in session:
+        with open(f"users_files/{session['username']}.txt") as file:
+            datas = file.readlines()
+
+        user = {}
+        for data in datas:
+            key, value = data.split(":", 1)
+            user[key.strip().lower()] = value.strip()
+        return render_template("index.html", user=user)
+    return redirect(url_for('registration'))
+    
 
 
 def decode_token(token):
@@ -51,7 +59,7 @@ def registration():
             file.write(f"Name: {name}\nusername: {username}\nPassword: {password}\nToken: {token}")
         with open('users.csv', 'a') as file:
             file.writelines(f"{name},{username},{password},{token}\n")
-        session['token'] = token
+        session['username'] = username
         return redirect(url_for("main"))
     return render_template("registration.html")
 
