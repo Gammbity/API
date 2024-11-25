@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token and Key Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header text-center">
+            Token and Key Management
+          </div>
+          <div class="card-body">
+            <form action="/" method="POST">
+              <!-- Token Input -->
+              <div class="mb-3">
+                <label for="tokenInput" class="form-label">Personal Token</label>
+                <div class="input-group">
+                  <input 
+                    type="password" 
+                    class="form-control" 
+                    name="personal_token"
+                    id="tokenInput" 
+                    placeholder="{{token}}"
+                    value="{{token}}" 
+                    readonly>
+                </div>
+              </div>
+
+              <!-- Additional Token Input -->
+              <div class="mb-3">
+                <label for="additionalTokenInput" class="form-label">Additional Token</label>
+                <div class="input-group">
+                  <input 
+                    type="password" 
+                    class="form-control" 
+                    name="additional_token"
+                    id="additionalTokenInput" 
+                    placeholder="Enter your additional token">
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-success w-100 mt-3">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Personal Token functionality
+    const tokenInput = document.getElementById('tokenInput');
+    document.getElementById('toggleTokenVisibility').addEventListener('click', () => {
+      tokenInput.type = tokenInput.type === 'password' ? 'text' : 'password';
+    });
+    document.getElementById('copyToken').addEventListener('click', () => {
+      navigator.clipboard.writeText(tokenInput.value).then(() => alert('Personal Token copied!'));
+    });
+    document.getElementById('clearToken').addEventListener('click', () => {
+      tokenInput.value = '';
+    });
+
+    // Additional Token functionality
+    const additionalTokenInput = document.getElementById('additionalTokenInput');
+    document.getElementById('toggleAdditionalTokenVisibility').addEventListener('click', () => {
+      additionalTokenInput.type = additionalTokenInput.type === 'password' ? 'text' : 'password';
+    });
+    document.getElementById('copyAdditionalToken').addEventListener('click', () => {
+      navigator.clipboard.writeText(additionalTokenInput.value).then(() => alert('Additional Token copied!'));
+    });
+    document.getElementById('clearAdditionalToken').addEventListener('click', () => {
+      additionalTokenInput.value = '';
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

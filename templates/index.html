@@ -31,6 +31,12 @@
                                 <th scope="row">Password</th>
                                 <td>{{ user.password }}</td>
                             </tr>
+                            {% for visitor in visitors %}
+                            <tr>
+                                <th scope="row">Visitor</th>
+                                <td>{{ visitor }}</td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
             </div>
