@@ -1,6 +1,0 @@
-Name: Abduboriy
-username: Gammbity
-Password: qwe
-Token: eyJ1c2VybmFtZSI6ICJHYW1tYml0eSJ9
-Visitor-1: Saru
-Visitor-2: Saru
