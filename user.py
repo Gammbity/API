@@ -55,8 +55,10 @@ def registration():
         token = base64.urlsafe_b64encode(payload_json.encode("utf-8")).decode("utf-8")
 
         file_name = f"{username}.txt" # user ning username miga moslab file ochiladi qaysi fayl kimga tegishli ekanligini topish uchun  Gam.txt
-        print(file_name)
-        file_path = os.path.join('users_files', file_name) # faylni ko'rsatilgan papkaga qo'shadi
+        # print(file_name)
+        # file_path = os.path.join('users_files', file_name) # faylni ko'rsatilgan papkaga qo'shadi
+        # print(file_path) "users_files/gam.txt"
+        file_path = f"users_files/{file_name}"
         print(file_path)
         if os.path.exists(file_path): # agar fayl bor bo'lsa demak bu user allaqachon royhatdan otgan
             return jsonify({'error': 'Foydalanuvchi allaqachon ro‘yxatdan o‘tgan!'}), 400 # hatolik
@@ -77,12 +79,12 @@ def check_token():
     """
     if request.method == "POST":
         personal_token = request.form.get('personal_token')
-        if request.form['additional_token']:
+        if request.form['additional_token'] and personal_token != request.form['additional_tokengit']:
             additional_token = request.form.get('additional_token')
             personal_username = decode_token(personal_token) # tokenni decode qilib usernameni olad
             additional_username = decode_token(additional_token) # tokenni decode qilib usernameni olad
             if additional_username != 400:
-                lenngth = 5
+                lenngth = 0
                 with open(f"users_files/{additional_username}.txt", 'r') as file: # shu username ga mos file ni topadi
                     data = file.readlines() # data ga file dagi malumotlar olinadi
                     lenngth = len(data) # 
