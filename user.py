@@ -55,9 +55,7 @@ def registration():
         token = base64.urlsafe_b64encode(payload_json.encode("utf-8")).decode("utf-8")
 
         file_name = f"{username}.txt" # user ning username miga moslab file ochiladi qaysi fayl kimga tegishli ekanligini topish uchun  Gam.txt
-        print(file_name)
-        file_path = os.path.join('users_files', file_name) # faylni ko'rsatilgan papkaga qo'shadi
-        print(file_path)
+        file_path = f"users_files/{file_name}"
         if os.path.exists(file_path): # agar fayl bor bo'lsa demak bu user allaqachon royhatdan otgan
             return jsonify({'error': 'Foydalanuvchi allaqachon ro‘yxatdan o‘tgan!'}), 400 # hatolik
         with open(file_path, 'w') as file: # user malumotlarini shaxsiy fayliga yozish 
